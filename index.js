@@ -6,7 +6,11 @@ var nodemailer = require('nodemailer')
 var mg = require('nodemailer-mailgun-transport')
 var bodyParser = require('body-parser')
 var nconf = require('nconf')
-var auth = require('./config.json')
+  // var auth = require('./config.json')
+var auth = {
+  api_key: api_key,
+  domain: domain
+}
 const port = process.env.PORT || 3000
 
 // make a request app and create the server 
