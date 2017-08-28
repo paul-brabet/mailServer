@@ -8,7 +8,7 @@ var bodyParser = require('body-parser')
 var nconf = require('nconf')
   // var auth = require('./config.json')
 var auth = {
-  auth = {
+  auth: {
     api_key: api_key,
     domain: domain
   }
