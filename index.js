@@ -8,8 +8,10 @@ var bodyParser = require('body-parser')
 var nconf = require('nconf')
   // var auth = require('./config.json')
 var auth = {
-  api_key: process.env.API_KEY,
-  domain: process.env.DOMAIN
+  auth: {
+    api_key: process.env.API_KEY,
+    domain: process.env.DOMAIN
+  }
 }
 const port = process.env.PORT || 3000
 
