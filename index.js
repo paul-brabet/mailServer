@@ -31,11 +31,6 @@ var accessLogStream = fs.createWriteStream(__dirname + '/access.log', { flags: '
 app.use(logger('dev'))
 app.use(logger('combined', { stream: accessLogStream }))
 
-// FOR TESTING PURPOSES ONLY
-app.get('/', (req, res) => {
-  res.sendFile('home.html', { root: __dirname })
-})
-
 app.post('/receivedEmail', (req, res) => {
   const name = clean(req.body.name)
   const email = clean(req.body.email)
@@ -44,8 +39,6 @@ app.post('/receivedEmail', (req, res) => {
   function clean(text) {
     return text.replace(/</g, "&lt;").replace(/>/g, "&gt;")
   }
-
-  console.log('\nCONTACT FORM DATA: ' + name + ' ' + email + ' ' + message + '\n')
 
   // create transporter object capable of sending email using the default SMTP transport
   var transporter = nodemailer.createTransport(mg(auth))
@@ -61,10 +54,11 @@ app.post('/receivedEmail', (req, res) => {
   // send mail with defined transport object
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      console.log('\nERROR: ' + error + '\n')
-        //   res.json({ yo: 'error' })
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.json({ yo: 'error' })
     } else {
-      res.redirect('/success')
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.json({ yo: 'Success' })
     }
   })
 })
