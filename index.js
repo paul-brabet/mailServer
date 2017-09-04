@@ -33,7 +33,7 @@ app.use(logger('combined', { stream: accessLogStream }))
 
 // enable CORS
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://paul-brabet.github.io/");
+  res.header("Access-Control-Allow-Origin", process.env.PAGE);
   next();
 });
 
@@ -62,17 +62,11 @@ app.post('/receivedEmail', (req, res) => {
   // send mail with defined transport object
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      res.setHeader('Access-Control-Allow-Origin', '*')
       res.json({ yo: error })
     } else {
-      res.setHeader('Access-Control-Allow-Origin', '*')
       res.json({ yo: 'Success' })
     }
   })
-})
-
-app.get('/success', (req, res) => {
-  res.sendFile('success.html', { root: __dirname })
 })
 
 server.listen(port, function() {
