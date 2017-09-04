@@ -40,18 +40,14 @@ app.use(function(req, res, next) {
 
 // route for email
 app.post('/receivedEmail', (req, res) => {
-  const name = req.body.name
-  const email = req.body.email
-  const message = req.body.message
+  const name = clean(req.body.name)
+  const email = clean(req.body.email)
+  const message = clean(req.body.message)
 
-  // const name = clean(req.body.name)
-  // const email = clean(req.body.email)
-  // const message = clean(req.body.message)
-
-  // // clean the received message
-  // function clean(text) {
-  //   return text.replace(/</g, "&lt;").replace(/>/g, "&gt;")
-  // }
+  // clean the received message
+  function clean(text) {
+    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  }
 
   // create transporter object capable of sending email using the default SMTP transport
   var transporter = nodemailer.createTransport(mg(auth))
