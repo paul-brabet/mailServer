@@ -61,7 +61,7 @@ app.post('/receivedEmail', (req, res) => {
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       res.setHeader('Access-Control-Allow-Origin', '*')
-      res.json({ yo: 'error' })
+      res.json({ yo: error })
     } else {
       res.setHeader('Access-Control-Allow-Origin', '*')
       res.json({ yo: 'Success' })
