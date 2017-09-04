@@ -41,9 +41,12 @@ app.use(function(req, res, next) {
 
 // route for email
 app.post('/receivedEmail', (req, res) => {
-  const name = clean(req.body.name)
-  const email = clean(req.body.email)
-  const message = clean(req.body.message)
+  // const name = clean(req.body.name)
+  // const email = clean(req.body.email)
+  // const message = clean(req.body.message)
+  const name = req.body.name
+  const email = req.body.email
+  const message = req.body.message
 
   // clean the received message
   function clean(text) {
