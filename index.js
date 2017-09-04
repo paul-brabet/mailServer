@@ -31,6 +31,13 @@ var accessLogStream = fs.createWriteStream(__dirname + '/access.log', { flags: '
 app.use(logger('dev'))
 app.use(logger('combined', { stream: accessLogStream }))
 
+// enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // route for email
 app.post('/receivedEmail', (req, res) => {
   const name = req.body.name
